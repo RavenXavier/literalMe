@@ -2,3 +2,15 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+.uColor{
+	font-size: 1.5rem;
+	color: grey;
+}
+.dColor{
+	font-size: 1.5rem;
+	color: grey
+}
+.uniform{
+	height: 300px;
+	width:250;
+}
