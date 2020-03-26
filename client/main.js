@@ -30,12 +30,18 @@ Template.mainBody.events({
   'click .js-editBook'(event, instance) {
     // open edit pane
     console.log('Editing...'+ ":" + this._id);
-    },
-
-	'click .js-addMe'(event, instance){
-		console.log("adding image...");	
-
-	},
+    $("#editBookModal").modal("show");
+  	var myId = this._id;
+  	var theTitle = booksdb.findOne({_id:myId}).title;
+  	var thePath = booksdb.findOne({_id:myId}).path;
+  	var theDesc = booksdb.findOne({_id:myId}).desc;
+  	$("#editId").val(myId);
+  	$("#editbookTitle").val(theTitle);
+  	$("#editbookPath").val(thePath);
+  	$("#editbookDesc").val(theDesc);
+  	$(".editHolder").attr("src", thePath);
+ 	},
+ 	
 });
 
 Template.addBook.events({
@@ -58,12 +64,47 @@ Template.addBook.events({
 		$('#bookTitle').val('');
 		$('#bookPath').val('');
 		$('#bookDesc').val('');
-		$(".placeHolder").attr("src",$("#bookPath").val())
+		$(".placeHolder").attr("src",$("#bookPath").val());
 	},
 	'input #bookPath'(event, instance){
-			$(".placeHolder").attr("src",$("#bookPath").val())
+			$(".placeHolder").attr("src",$("#bookPath").val());
 			console.log($("#bookPath").val());
 
 		},
 
+});
+
+Template.editBook.events({
+	'click .js-editMe'(event, instance){
+		var newTitle = $('#editbookTitle').val();
+		var newPath = $('#editbookPath').val();
+		var newDesc = $('#editbookDesc').val();
+		var updateId = $('#editId').val();
+		booksdb.update({_id: updateId},
+				{$set:{
+					"title": newTitle,
+					"path": newPath,
+					"desc": newDesc
+				}}
+			);
+		// $("#editBookModal").modal("hide");
+		console.log(newTitle + ": " + newDesc + ": " + newPath + ": " + updateId );
+	},
+	'click .js-closeMe'(event, instance){
+		$("#editBookModal").modal("hide");
+		$('#editbookTitle').val('');
+		$('#editbookPath').val('');
+		$('#editbookDesc').val('');
+		$(".editHolder").attr("src",$("#editbookPath").val());
+	},
+	'input #editbookPath'(event, instance){
+			$(".editHolder").attr("src",$("#editbookPath").val());
+			console.log($("#editbookPath").val());
+		}	
+});
+
+Template.veiwBook.events({
+	'click .js-veiwBook'(event, instance){
+
+	},
 });
