@@ -17,7 +17,7 @@ import '../lib/collection.js';
 
 Template.mainBody.helpers({
  	allCards(){
- 		return imagesdb.find();
+ 		return booksdb.find();
  	},
 });
 
@@ -33,34 +33,37 @@ Template.mainBody.events({
     },
 
 	'click .js-addMe'(event, instance){
-		console.log("adding image...");
-		var myTitle = $("#bookTitle").val();
-		var myPath = $("#bookPath").val();
-		var myDesc = $("#bookDesc").val();
-		imagesdb.insert({
+		console.log("adding image...");	
+
+	},
+});
+
+Template.addBook.events({
+	'click .js-addMe'(event, instance){
+		var myTitle = $('#bookTitle').val();
+		var myPath = $('#bookPath').val();
+		var myDesc = $('#bookDesc').val();
+		booksdb.insert({
 			"title": myTitle,
 			"path": myPath,
-			"desc": myDesc,
-			// "createdOn":  new Date().getTime()
- 		});
- 		console.log("saving...");
- 		$("#addBookModal").modal("hide");
- 		var myTitle = $("#bookTitle").val("");
-		var myPath = $("#bookPath").val("");
-		var myDesc = $("#bookDesc").val("");
+			"desc": myDesc
+		});
+		$("#addBookModal").modal("hide");
+		$('#bookTitle').val('');
+		$('#bookPath').val('');
+		$('#bookDesc').val('');
 	},
-	// 'click .js-closeMe'(event, instance){
-	// 	// console.log("closing...")
-	// 	var myTitle = $("#imgTitle").val("");
-	// 	var myPath = $("#imgPath").val("");
-	// 	var myDesc = $("#imgDesc").val("");
-	// 	$(".placeHolder").attr("src",$("#imgPath").val())
-	// }, 
-	// 'click .js-saveMe'(event, instance){
-	
-	// 	'input #imgPath'(event, instance){
-	// 		$(".placeHolder").attr("src",$("#imgPath").val())
-	// 		console.log($("#imgPath").val());
+	'click .js-closeMe'(event, instance){
+		$("#addBookModal").modal("hide");
+		$('#bookTitle').val('');
+		$('#bookPath').val('');
+		$('#bookDesc').val('');
+		$(".placeHolder").attr("src",$("#bookPath").val())
+	},
+	'input #bookPath'(event, instance){
+			$(".placeHolder").attr("src",$("#bookPath").val())
+			console.log($("#bookPath").val());
 
-	// 	},
+		},
+
 });
