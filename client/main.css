@@ -8,7 +8,12 @@ body {
 }
 .dColor{
 	font-size: 1.5rem;
-	color: grey
+	color: grey;
+}
+.tColor{
+	font-size: 2rem;
+	color: red;
+
 }
 .uniform{
 	height: 300px;

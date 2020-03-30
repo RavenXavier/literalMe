@@ -25,7 +25,17 @@ Template.mainBody.events({
   'click .js-veiwBook'(event, instance) {
     // open veiw pane
     console.log('Veiwing...' + ":" + this._id);
-    
+    $("#veiwBookModal").modal("show");
+    var myId = this._id;
+  	var theTitle = booksdb.findOne({_id:myId}).title;
+  	var thePath = booksdb.findOne({_id:myId}).path;
+  	var theDesc = booksdb.findOne({_id:myId}).desc;
+    console.log('Veiwing...' + ":" + this._id+ 'Title: '+ theTitle + 'Desc: '+theDesc+'path: '+thePath); //all info appears 
+  	$("#veiwId").val(myId);
+  	$("#veiwTitle").val(theTitle); //no title
+  	$("#veiwDesc").val(theDesc); //no description
+  	$(".veiwHolder").attr("src", thePath); //image appears
+  	console.log($("#veiwTitle").val()); //title appars in log 
     },
   'click .js-editBook'(event, instance) {
     // open edit pane
@@ -39,7 +49,7 @@ Template.mainBody.events({
   	$("#editbookTitle").val(theTitle);
   	$("#editbookPath").val(thePath);
   	$("#editbookDesc").val(theDesc);
-  	$(".editHolder").attr("src", thePath);
+  	$(".veiwHolder").attr("src", thePath);
  	},
  	
 });
@@ -68,7 +78,7 @@ Template.addBook.events({
 	},
 	'input #bookPath'(event, instance){
 			$(".placeHolder").attr("src",$("#bookPath").val());
-			console.log($("#bookPath").val());
+			//.log($("#bookPath").val());
 
 		},
 
@@ -87,8 +97,8 @@ Template.editBook.events({
 					"desc": newDesc
 				}}
 			);
-		// $("#editBookModal").modal("hide");
-		console.log(newTitle + ": " + newDesc + ": " + newPath + ": " + updateId );
+		$("#editBookModal").modal("hide");
+		// console.log(newTitle + ": " + newDesc + ": " + newPath + ": " + updateId );
 	},
 	'click .js-closeMe'(event, instance){
 		$("#editBookModal").modal("hide");
@@ -99,12 +109,14 @@ Template.editBook.events({
 	},
 	'input #editbookPath'(event, instance){
 			$(".editHolder").attr("src",$("#editbookPath").val());
-			console.log($("#editbookPath").val());
+			//console.log($("#editbookPath").val());
 		}	
 });
 
 Template.veiwBook.events({
-	'click .js-veiwBook'(event, instance){
-
+	'click .js-delete'(event, instance){
+		var myId =this._id;
+		booksdb.remove({_id:myId});
 	},
+
 });

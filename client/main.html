@@ -60,6 +60,7 @@
   <main role="main">
     {{> myJumbo}}
     {{> editBook}}
+    {{> veiwBook}}
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row" >
@@ -180,7 +181,7 @@
                 </div>
                 <textarea class="form-control" id="editbookDesc" aria-label="With textarea"></textarea>
                </div>
-               <input id="editId" type="text">
+               <input id="editId" type="hidden">
               </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary js-closeMe" data-dismiss="modal">Close</button>
@@ -197,17 +198,30 @@
   <div class="row">
     <div class="col-4">
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+      <div class="modal fade bd-example-modal-xl" id="veiwBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+              <div class="card mb-3 text-center" style="max-width: 1040px; font-size: 1rem;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img id="veiwPath" src="" class="card-img veiwHolder" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
+                      <p class="card-text " id="veiwDesc">{{desc}}</p>
+                      <input id="veiwId" type="hidden">
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- card/div -->
             </div>
             <div class="modal-footer">
              <i class="fa fa-trash tColor js-delete"></i>
