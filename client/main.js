@@ -115,8 +115,17 @@ Template.editBook.events({
 
 Template.veiwBook.events({
 	'click .js-delete'(event, instance){
-		var myId =this._id;
-		booksdb.remove({_id:myId});
+		var myId = this._id;
+		$('#deleteId').val(myId);
+		console.log(myId);
+		$('#confirmModal').modal('show')
+	},
+	'click js-confirm'(event, instance){
+		var myId = $('#deleteId').val();
+ 		$("#"+myId).fadeOut('slow',function(){
+  	booksdb.remove({_id:myId});
+  	});
+  	console.log(myId);
 	},
 
 });
