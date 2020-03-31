@@ -13,7 +13,6 @@ body {
 .tColor{
 	font-size: 2rem;
 	color: red;
-
 }
 .uniform{
 	height: 300px;
@@ -21,4 +20,13 @@ body {
 }
 .placeHolder{
 	padding: 10px;
+}
+.editHolder{
+	width: 300px;
+	height: 300px;
+	margin-left:80px ;
+}
+.veiwHolder{
+	width: 100%;
+	
 }

@@ -32,8 +32,8 @@ Template.mainBody.events({
   	var theDesc = booksdb.findOne({_id:myId}).desc;
     console.log('Veiwing...' + ":" + this._id+ 'Title: '+ theTitle + 'Desc: '+theDesc+'path: '+thePath); //all info appears 
   	$("#veiwId").val(myId);
-  	$("#veiwTitle").val(theTitle); //no title
-  	$("#veiwDesc").val(theDesc); //no description
+  	$("#veiwTitle").html(theTitle); //no title
+  	$("#veiwDesc").html(theDesc); //no description
   	$(".veiwHolder").attr("src", thePath); //image appears
   	console.log($("#veiwTitle").val()); //title appars in log 
     },
@@ -49,9 +49,9 @@ Template.mainBody.events({
   	$("#editbookTitle").val(theTitle);
   	$("#editbookPath").val(thePath);
   	$("#editbookDesc").val(theDesc);
-  	$(".veiwHolder").attr("src", thePath);
+  	$(".editHolder").attr("src", thePath);
  	},
- 	
+
 });
 
 Template.addBook.events({
@@ -116,12 +116,13 @@ Template.editBook.events({
 Template.veiwBook.events({
 	'click .js-delete'(event, instance){
 		var myId = this._id;
-		$('#deleteId').val(myId);
-		console.log(myId);
+		$("#deleteId").val(myId);
+		console.log(this._id);
 		$('#confirmModal').modal('show')
 	},
-	'click js-confirm'(event, instance){
+	'click .js-confirm'(event, instance){
 		var myId = $('#deleteId').val();
+		console.log(myId);
  		$("#"+myId).fadeOut('slow',function(){
   	booksdb.remove({_id:myId});
   	});
