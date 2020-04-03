@@ -3,7 +3,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container ">
     {{> navBar}}
     {{> mainBody}}
     {{> footerBar}}
@@ -62,16 +62,17 @@
     {{> editBook}}
     {{> veiwBook}}
     <div class="album py-5 bg-light">
-      <div class="container">
+      <div class="container ">
         <div class="row" >
           {{#each allCards}}
           <div class="col-md-4 " id={{_id}} >
             <div class="card mb-4 shadow-sm">
-              <img src={{path}} class="uniform" alt="">
-              {{> thumbVote}}
-              <!-- <i class="fa fa-trash tColor js-delete"></i> -->
+              <img src={{path}} class="uniform " alt="">
+                {{> thumbVote}}
               <div class="card-body">
+                <medium class="text-muted">by: {{author}}</medium>
                 <p class="card-text">{{desc}}</p>
+                <small class="text-muted">{{veiws}} veiws</small>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary js-veiwBook">View</button>
@@ -90,8 +91,8 @@
 </template>
 
 <template name="thumbVote">
-   <div class="row justify-content-right">
-      <div class="col" id={{_id}}>
+   <div class="row ">
+      <div class="col text-right thumbedits" id={{_id}}>
         <i class="fa fa-thumbs-up uColor js-like"></i>
         <i class="fa fa-thumbs-down dColor js-dislike"></i>
       </div>    
@@ -128,7 +129,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default ">Path</span>
                 </div>
-                <input type="text" class="form-control" id=bookPath placeholder="paste image path here" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" id="bookPath" placeholder="paste image path here" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+               <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default ">Author</span>
+                </div>
+                <input type="text" class="form-control" id="bookAuthor" placeholder="" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
                <div class="input-group">
                 <div class="input-group-prepend">
@@ -168,21 +175,27 @@
                   <span class="input-group-text" id="inputGroup-sizing-default ">Title</span>
                 </div>
                 <input type="text" class="form-control" id="editbookTitle" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
+              </div> <!-- title input/div -->
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default ">Path</span>
                 </div>
                 <input type="text" class="form-control" id="editbookPath" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
+              </div> <!-- path input/div -->
+               <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default ">Author</span>
+                </div>
+                <input type="text" class="form-control" id="editbookAuthor" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div> <!-- author input/div -->
                <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Description</span>
                 </div>
                 <textarea class="form-control" id="editbookDesc" aria-label="With textarea"></textarea>
-               </div>
+               </div> <!-- description input/div -->
                <input id="editId" type="hidden">
-              </div>
+              </div> <!-- modal-body -->
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary js-closeMe" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary js-editMe">Save</button>
@@ -192,7 +205,7 @@
       </div>
     </div>
   </div>  
-</template>
+</template> <!-- editBook -->
 
 <template name="veiwBook">
   <div class="row">
@@ -208,7 +221,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="card mb-3 text-center" style="max-width: 1040px; font-size: 1.5rem;">
+              <div class="card mb-3 text-left" style="max-width: 1040px; font-size: 1.5rem;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
                     <img src="" class="card-img veiwHolder" alt="">
@@ -216,6 +229,7 @@
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title " id="veiwTitle">{{title}}</h5>
+                      <h6 class="card-subtitle text-muted" id="viewAuthor">by: {{author}}</h6>
                       <p class="card-text " id="veiwDesc">{{desc}}</p>
                       <input id="veiwId" type="hidden">
                     </div>
@@ -237,7 +251,7 @@
                   <h5 class="modal-title" id="staticBackdropLabel">Are really really sure you wanna delete this?</h5>
                 </div>
                 <div class="modal-footer">
-                  <input id="deleteId" type="text">
+                  <input id="deleteId" type="hidden">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                   <button type="button" class="btn btn-primary js-confirm" data-dismiss="modal">Yes</button>
                 </div>

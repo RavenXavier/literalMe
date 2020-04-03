@@ -1,7 +1,11 @@
 body {
   padding: 10px;
   font-family: sans-serif;
+  background-image: url('../public/thomas-kelley-hHL08lF7Ikc-unsplash.jpg');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 }
+
 .uColor{
 	font-size: 1.5rem;
 	color: grey;
@@ -16,7 +20,7 @@ body {
 }
 .uniform{
 	height: 300px;
-	width:250;
+	
 }
 .placeHolder{
 	padding: 10px;
@@ -28,5 +32,11 @@ body {
 }
 .veiwHolder{
 	width: 100%;
-	
+}
+#veiwTitle{
+	font-size: 2.5rem;
+}
+.thumbedits{
+	padding-right: 3rem;
+	padding-top: 1rem;
 }
