@@ -65,6 +65,9 @@ Template.mainBody.events({
 });
 
 Template.addBook.events({
+	'click .js-add'(event, instance){
+		$("#addBookModal").modal("show");
+	},
 	'click .js-addMe'(event, instance){
 		var myTitle = $('#bookTitle').val();
 		var myPath = $('#bookPath').val();
@@ -89,6 +92,7 @@ Template.addBook.events({
 		$('#bookAuthor').val('');
 		$('#bookDesc').val('');
 		$(".placeHolder").attr("src",$("#bookPath").val());
+
 	},
 	'input #bookPath'(event, instance){
 			$(".placeHolder").attr("src",$("#bookPath").val());

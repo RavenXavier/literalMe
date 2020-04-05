@@ -41,20 +41,21 @@
       </div>
     </div>
   </header>
-</template>
+</template> <!-- navBar -->
 
 <template name="myJumbo">
   <section class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">literalMe</h1>
       <p class="lead text-muted">Glad you found your way here. It's always a good time to read a book. Find your passion amongst the stars by choosing from our many categories tailored just for you.</p>
-      <p>
+      <!-- <p>
         <a href="#" class="btn btn-primary my-2">Top Rated Book</a>
-      </p>
+      </p> -->
+      <i class="fa fa-star " style="font-size: 1.5rem;"> Top Rated Book</i>
       {{> addBook}}
     </div>
   </section>
-</template>
+</template> <!-- myJumbo -->
 
 <template name="mainBody">
   <main role="main">
@@ -88,7 +89,7 @@
       </div>
     </div>
   </main>
-</template>
+</template> <!-- mainBody -->
 
 <template name="thumbVote">
    <div class="row ">
@@ -97,15 +98,16 @@
         <i class="fa fa-thumbs-down dColor js-dislike"></i>
       </div>    
    </div>
-</template>
+</template> <!-- thumbVote -->
 
 <template name="addBook">
   <div class="row">
     <div class="col">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal">
-        Add a Book
-      </button>
+      <!-- <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal" data-target="#addBookModal">
+        +Book
+      </button> -->
+      <i class="fa fa-plus-square js-add" style="font-size: 1.5rem;"> AddBook</i>
 
       <!-- Modal -->
       <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,7 +120,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <img class="placeHolder" src='data:image/svg+xml;charset=UTF-8,<svg%20width%3D"348"%20height%3D"225"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20348%20225"%20preserveAspectRatio%3D"none"><defs><style%20type%3D"text%2Fcss">%23holder_1697acec537%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20<%2Fstyle><%2Fdefs><g%20id%3D"holder_1697acec537"><rect%20width%3D"348"%20height%3D"225"%20fill%3D"%2355595c"><%2Frect><g><text%20x%3D"116.7265625"%20y%3D"120.3">Thumbnail<%2Ftext><%2Fg><%2Fg><%2Fsvg>'  alt="">
+              <img class="placeHolder " src='data:image/svg+xml;charset=UTF-8,<svg%20width%3D"348"%20height%3D"225"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20348%20225"%20preserveAspectRatio%3D"none"><defs><style%20type%3D"text%2Fcss">%23holder_1697acec537%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20<%2Fstyle><%2Fdefs><g%20id%3D"holder_1697acec537"><rect%20width%3D"348"%20height%3D"225"%20fill%3D"%2355595c"><%2Frect><g><text%20x%3D"116.7265625"%20y%3D"120.3">Thumbnail<%2Ftext><%2Fg><%2Fg><%2Fsvg>'  alt="">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default ">Title</span>
@@ -153,7 +155,7 @@
       </div>
     </div>
   </div>  
-</template>
+</template> <!-- addBook -->
 
 <template name="editBook">
   <div class="row">
@@ -229,7 +231,7 @@
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title " id="veiwTitle">{{title}}</h5>
-                      <h6 class="card-subtitle text-muted" id="viewAuthor">by: {{author}}</h6>
+                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
                       <p class="card-text " id="veiwDesc">{{desc}}</p>
                       <input id="veiwId" type="hidden">
                     </div>
@@ -264,6 +266,45 @@
   </div>
 </template> <!-- veiwBook -->
 
+<template name="ratedBook">
+  <div class="row">
+    <div class="col-4">
+      <!-- Modal -->
+      <div class="modal fade bd-example-modal-xl" id="ratedBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="card mb-3 text-left" style="max-width: 1040px; font-size: 1.5rem;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="" class="card-img veiwHolder" alt="">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
+                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
+                      <p class="card-text " id="veiwDesc">{{desc}}</p>
+                      <input id="veiwId" type="hidden">
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- card/div -->
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <template name="footerBar">
   <footer class="text-muted">
     <div class="container">
@@ -273,4 +314,4 @@
       <p>&copy; WeTookYourDesignsInc</p>      
     </div>
   </footer>
-</template>
+</template> <!-- footerBar -->

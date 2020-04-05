@@ -1,8 +1,8 @@
 body {
   padding: 10px;
   font-family: sans-serif;
-  background-image: url('../public/thomas-kelley-hHL08lF7Ikc-unsplash.jpg');
-	background-attachment: fixed;
+  background-image:url('../public/thomas-kelley-hHL08lF7Ikc-unsplash.jpg');
+	background-attachment: cover;
 	background-repeat: no-repeat;
 }
 
@@ -20,11 +20,11 @@ body {
 }
 .uniform{
 	height: 300px;
-	
 }
 .placeHolder{
 	padding: 10px;
-}
+	width: 300px;
+	height: 300px;}
 .editHolder{
 	width: 300px;
 	height: 300px;
@@ -39,4 +39,7 @@ body {
 .thumbedits{
 	padding-right: 3rem;
 	padding-top: 1rem;
+}
+.starColor{
+	color: gold;
 }
