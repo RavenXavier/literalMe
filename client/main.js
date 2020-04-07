@@ -10,18 +10,15 @@ global.Popper = popper // fixes some issues with Popper and Meteor
 import './main.html';
 import '../lib/collection.js';
 
-// Template.hello.onCreated(function helloOnCreated() {
-//   // counter starts at 0
-//   this.counter = new ReactiveVar(0);
-// });
 
 Template.mainBody.helpers({
  	allCards(){
  		return booksdb.find();
- 	},
+ 		},
  	veiws() {
     return Template.instance().veiws.get();
-  },
+  	},
+  
 });
 
 Template.mainBody.events({
@@ -37,8 +34,7 @@ Template.mainBody.events({
   	$("#veiwDesc").html(theDesc); 												//shows description
   	$("#veiwAuthor").html(theAuthor);
   	$(".veiwHolder").attr("src", thePath); 								//image appears
-  	instance.veiws.set(instance.veiws.get() + 1);
-  	
+    instance.veiws.set(instance.veiws.get() + 1);
     },
 
   'click .js-editBook'(event, instance) {
@@ -57,10 +53,22 @@ Template.mainBody.events({
   	$(".editHolder").attr("src", thePath);
  	},
  	'click .js-like'(event, instance){
- 		console.log("like: " + this._id);
+		var button = document.getElementById("thUp"),
+  	count = 0;
+		button.onclick = function() {
+  	count += 1;
+  	button.innerHTML = " " + count;
+		};
+
  	},
  	'click .js-dislike'(event, instance){
- 		console.log("dislike: " + this._id);	
+ 		console.log("dislike: " + this._id);
+ 		var button = document.getElementById("thDown"),
+  	count = 0;
+		button.onclick = function() {
+  	count += 1;
+  	button.innerHTML = " " + count;
+		};	
  	},
 });
 
@@ -105,7 +113,7 @@ Template.editBook.events({
 		var newTitle = $('#editbookTitle').val();
 		var newPath = $('#editbookPath').val();
 		var newDesc = $('#editbookDesc').val();
-		var newAuthor = $('#editAuthor').val();
+		var newAuthor = $('#editbookAuthor').val();
 		var updateId = $('#editId').val();
 		booksdb.update({_id: updateId},
 				{$set:{
@@ -144,7 +152,6 @@ Template.veiwBook.events({
 	},
 
 });
-
 
 Template.mainBody.onCreated(function mainBodyOnCreated(){
 	this.veiws = new ReactiveVar(0); 

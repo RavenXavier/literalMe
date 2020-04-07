@@ -64,22 +64,21 @@
     {{> veiwBook}}
     <div class="album py-5 bg-light">
       <div class="container ">
-        <div class="row" >
+        <div class="row backColor" >
           {{#each allCards}}
           <div class="col-md-4 " id={{_id}} >
             <div class="card mb-4 shadow-sm">
               <img src={{path}} class="uniform " alt="">
-                {{> thumbVote}}
               <div class="card-body">
-                <medium class="text-muted">by: {{author}}</medium>
-                <p class="card-text">{{desc}}</p>
-                <small class="text-muted">{{veiws}} veiws</small>
+                <h5 class="card-title text-center">{{title}}</h5>
+                <medium class="card-subtitle">by: {{author}}</medium>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary js-veiwBook">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary js-editBook">Edit</button>
                   </div>
-                  <small class="text-muted">9 mins</small>
+                  <small class="fa fa-eye text-muted"> {{veiws}} veiws</small>
+                  {{> thumbVote}}
                 </div>
               </div>
             </div>
@@ -92,10 +91,10 @@
 </template> <!-- mainBody -->
 
 <template name="thumbVote">
-   <div class="row ">
+   <div class="row  ">
       <div class="col text-right thumbedits" id={{_id}}>
-        <i class="fa fa-thumbs-up uColor js-like"></i>
-        <i class="fa fa-thumbs-down dColor js-dislike"></i>
+        <i  class="fa fa-thumbs-up uColor js-like" id="thUp"> 0</i>
+        <i  class="fa fa-thumbs-down dColor js-dislike" id="thDown"> 0</i>
       </div>    
    </div>
 </template> <!-- thumbVote -->
@@ -231,7 +230,7 @@
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title " id="veiwTitle">{{title}}</h5>
-                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
+                      <h4 class="card-subtitle text-muted" id="veiwAuthor">written by: {{author}}</h4>
                       <p class="card-text " id="veiwDesc">{{desc}}</p>
                       <input id="veiwId" type="hidden">
                     </div>
@@ -250,7 +249,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Are really really sure you wanna delete this?</h5>
+                  <h5 class="modal-title" id="staticBackdropLabel">Are you sure you want delete this book?</h5>
                 </div>
                 <div class="modal-footer">
                   <input id="deleteId" type="hidden">
@@ -265,45 +264,6 @@
     </div>
   </div>
 </template> <!-- veiwBook -->
-
-<template name="ratedBook">
-  <div class="row">
-    <div class="col-4">
-      <!-- Modal -->
-      <div class="modal fade bd-example-modal-xl" id="ratedBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="card mb-3 text-left" style="max-width: 1040px; font-size: 1.5rem;">
-                <div class="row no-gutters">
-                  <div class="col-md-4">
-                    <img src="" class="card-img veiwHolder" alt="">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
-                      <h6 class="card-subtitle text-muted" id="veiwAuthor">{{author}}</h6>
-                      <p class="card-text " id="veiwDesc">{{desc}}</p>
-                      <input id="veiwId" type="hidden">
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- card/div -->
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 <template name="footerBar">
   <footer class="text-muted">

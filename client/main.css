@@ -1,22 +1,21 @@
 body {
   padding: 10px;
   font-family: sans-serif;
-  background-image:url('../public/thomas-kelley-hHL08lF7Ikc-unsplash.jpg');
-	background-attachment: cover;
-	background-repeat: no-repeat;
 }
-
+.backColor{
+	background-color: 
+}
 .uColor{
 	font-size: 1.5rem;
-	color: grey;
+	color: green;
 }
 .dColor{
 	font-size: 1.5rem;
-	color: grey;
+	color: red;
 }
 .tColor{
 	font-size: 2rem;
-	color: red;
+	color: purple;
 }
 .uniform{
 	height: 300px;
@@ -31,15 +30,12 @@ body {
 	margin-left:80px ;
 }
 .veiwHolder{
-	width: 100%;
+	width: 350px;
+	height:350px;
 }
 #veiwTitle{
 	font-size: 2.5rem;
 }
 .thumbedits{
-	padding-right: 3rem;
-	padding-top: 1rem;
-}
-.starColor{
-	color: gold;
+	padding-right: 1rem;
 }
