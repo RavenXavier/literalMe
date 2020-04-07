@@ -48,10 +48,6 @@
     <div class="container">
       <h1 class="jumbotron-heading">literalMe</h1>
       <p class="lead text-muted">Glad you found your way here. It's always a good time to read a book. Find your passion amongst the stars by choosing from our many categories tailored just for you.</p>
-      <!-- <p>
-        <a href="#" class="btn btn-primary my-2">Top Rated Book</a>
-      </p> -->
-      <i class="fa fa-star " style="font-size: 1.5rem;"> Top Rated Book</i>
       {{> addBook}}
     </div>
   </section>
@@ -61,7 +57,7 @@
   <main role="main">
     {{> myJumbo}}
     {{> editBook}}
-    {{> veiwBook}}
+    {{> viewBook}}
     <div class="album py-5 bg-light">
       <div class="container ">
         <div class="row backColor" >
@@ -74,10 +70,10 @@
                 <medium class="card-subtitle">by: {{author}}</medium>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary js-veiwBook">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary js-viewBook">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary js-editBook">Edit</button>
                   </div>
-                  <small class="fa fa-eye text-muted"> {{veiws}} veiws</small>
+                  <small class="fa fa-eye text-muted"> {{views}} views</small>
                   {{> thumbVote}}
                 </div>
               </div>
@@ -93,8 +89,8 @@
 <template name="thumbVote">
    <div class="row  ">
       <div class="col text-right thumbedits" id={{_id}}>
-        <i  class="fa fa-thumbs-up uColor js-like" id="thUp"> 0</i>
-        <i  class="fa fa-thumbs-down dColor js-dislike" id="thDown"> 0</i>
+        <i  class="fa fa-thumbs-up uColor js-like" id="thUp"> {{upVote}}</i>
+        <i  class="fa fa-thumbs-down dColor js-dislike" id="thDown"> {{downVote}}</i>
       </div>    
    </div>
 </template> <!-- thumbVote -->
@@ -208,15 +204,14 @@
   </div>  
 </template> <!-- editBook -->
 
-<template name="veiwBook">
+<template name="viewBook">
   <div class="row">
     <div class="col-4">
       <!-- Modal -->
-      <div class="modal fade bd-example-modal-xl" id="veiwBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-xl" id="viewBookModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -225,14 +220,14 @@
               <div class="card mb-3 text-left" style="max-width: 1040px; font-size: 1.5rem;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="" class="card-img veiwHolder" alt="">
+                    <img src="" class="card-img viewHolder" alt="">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title " id="veiwTitle">{{title}}</h5>
-                      <h4 class="card-subtitle text-muted" id="veiwAuthor">written by: {{author}}</h4>
-                      <p class="card-text " id="veiwDesc">{{desc}}</p>
-                      <input id="veiwId" type="hidden">
+                      <h5 class="card-title " id="viewTitle">{{title}}</h5>
+                      <h4 class="card-subtitle text-muted" id="viewAuthor">written by: {{author}}</h4>
+                      <p class="card-text " id="viewDesc">{{desc}}</p>
+                      <input id="viewId" type="hidden">
                     </div>
                   </div>
                 </div>

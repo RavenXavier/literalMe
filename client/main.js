@@ -10,35 +10,62 @@ global.Popper = popper // fixes some issues with Popper and Meteor
 import './main.html';
 import '../lib/collection.js';
 
+Session.set("imageLimit", 9);
+lastScrollTop = 0;
+
+$(window).scroll(function(event){
+	//check if we are near the bottom of the page 
+	if($(window).scrollTop() + $(window).height() > $(document).height() - 100){
+		//where are we on the page
+		var scrollTop = $(this).scrollTop();
+		//test if we are going down
+		if (scrollTop > lastScrollTop){
+			//yes we are scrolling down
+			Session.set("bookLimit",Session.get("bookLimit") + 3);
+		}//end of if (new scrollTop)
+		lastScrollTop = scrollTop;	
+	}//end of (height check)
+});	
 
 Template.mainBody.helpers({
- 	allCards(){
- 		return booksdb.find();
- 		},
- 	veiws() {
-    return Template.instance().veiws.get();
-  	},
-  
+  allCards() {
+		//get time 15 seconds
+		var prevTime = new Date().getTime() - 15000;
+		var results = booksdb.find({createdOn: {$gte: prevTime}}).count();
+
+		if (results > 0){
+			return booksdb.find({}, {sort:{createdOn: -1,upVote: -1 }, limit: Session.get("bookLimit")});
+		}
+		else{
+			return booksdb.find({}, {sort:{ upVote: -1, createdOn: -1}, limit: Session.get("bookLimit")});
+		}
+	},
 });
 
+
 Template.mainBody.events({
-  'click .js-veiwBook'(event, instance) {
-    $("#veiwBookModal").modal("show");
+  'click .js-viewBook'(event, instance) {
+  	$("#viewBookModal").modal("show");
     var myId = this._id;
   	var theTitle = booksdb.findOne({_id:myId}).title;
   	var thePath = booksdb.findOne({_id:myId}).path;
   	var theDesc = booksdb.findOne({_id:myId}).desc;
   	var theAuthor = booksdb.findOne({_id:myId}).author;
-  	$("#veiwId").val(myId);
-  	$("#veiwTitle").html(theTitle); 											//shows title
-  	$("#veiwDesc").html(theDesc); 												//shows description
-  	$("#veiwAuthor").html(theAuthor);
-  	$(".veiwHolder").attr("src", thePath); 								//image appears
-    instance.veiws.set(instance.veiws.get() + 1);
+  	var theView = booksdb.findOne({_id:myId}).views;
+  	$("#viewId").val(myId);
+  	$("#viewTitle").html(theTitle); 											//shows title
+  	$("#viewDesc").html(theDesc); 												//shows description
+  	$("#viewAuthor").html(theAuthor);
+  	$(".viewHolder").attr("src", thePath); 								//image appears
+  	theView += 1;
+  	booksdb.update({_id:myId},
+  		{$set:{
+  			"views": theView
+  			}}
+  		);
     },
 
   'click .js-editBook'(event, instance) {
-    console.log('Editing...'+ ":" + this._id);
     $("#editBookModal").modal("show");
   	var myId = this._id;
   	var theTitle = booksdb.findOne({_id:myId}).title;
@@ -53,22 +80,24 @@ Template.mainBody.events({
   	$(".editHolder").attr("src", thePath);
  	},
  	'click .js-like'(event, instance){
-		var button = document.getElementById("thUp"),
-  	count = 0;
-		button.onclick = function() {
-  	count += 1;
-  	button.innerHTML = " " + count;
-		};
-
+ 		var myId = this._id;
+ 		var myUp = booksdb.findOne({_id:myId}).upVote;
+ 		myUp += 1;
+ 		booksdb.update({_id:myId},
+  		{$set:{
+  			"upVote": myUp
+  			}}
+  		);
  	},
  	'click .js-dislike'(event, instance){
- 		console.log("dislike: " + this._id);
- 		var button = document.getElementById("thDown"),
-  	count = 0;
-		button.onclick = function() {
-  	count += 1;
-  	button.innerHTML = " " + count;
-		};	
+ 		var myId = this._id;
+ 		var myDown = booksdb.findOne({_id:myId}).downVote;
+ 		myDown += 1;
+ 		booksdb.update({_id:myId},
+  		{$set:{
+  			"downVote": myDown
+  			}}
+  		);	
  	},
 });
 
@@ -85,13 +114,18 @@ Template.addBook.events({
 			"title": myTitle,
 			"path": myPath,
 			"desc": myDesc,
-			"author": myAuthor
+			"author": myAuthor,
+			"views": 0,
+			"upVote": 0,
+			"downVote": 0,
+			"createdOn":  new Date().getTime()
 		});
 		$("#addBookModal").modal("hide");
 		$('#bookTitle').val('');
 		$('#bookPath').val('');
 		$('#bookAuthor').val('');
 		$('#bookDesc').val('');
+		$(".placeHolder").attr("src",$("#bookPath").val());
 	},
 	'click .js-closeMe'(event, instance){
 		$("#addBookModal").modal("hide");
@@ -138,9 +172,9 @@ Template.editBook.events({
 		}	
 });
 
-Template.veiwBook.events({
+Template.viewBook.events({
 	'click .js-delete'(event, instance){
-		var myId = $('#veiwId').val();
+		var myId = $('#viewId').val();
 		$("#deleteId").val(myId);
 		$('#confirmModal').modal('show')
 	},
@@ -151,8 +185,4 @@ Template.veiwBook.events({
   	});
 	},
 
-});
-
-Template.mainBody.onCreated(function mainBodyOnCreated(){
-	this.veiws = new ReactiveVar(0); 
 });
